@@ -1,0 +1,172 @@
+.technology-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.technology-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Стили для разных статусов */
+.technology-card--completed {
+  border-color: #27ae60;
+  background: linear-gradient(135deg, #fff, #f8fff9);
+}
+
+.technology-card--in_progress {
+  border-color: #f39c12;
+  background: linear-gradient(135deg, #fff, #fffaf0);
+}
+
+.technology-card--not_started {
+  border-color: #bdc3c7;
+  background: linear-gradient(135deg, #fff, #f8f9fa);
+}
+
+.status-indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-indicator--completed {
+  background-color: #27ae60;
+  color: white;
+}
+
+.status-indicator--in_progress {
+  background-color: #f39c12;
+  color: white;
+}
+
+.status-indicator--not_started {
+  background-color: #bdc3c7;
+  color: #2c3e50;
+}
+
+.technology-card__title {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  margin: 0.5rem 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.technology-card__description {
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+/* Индикатор прогресса */
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.progress-fill--completed {
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.progress-fill--in_progress {
+  background: linear-gradient(90deg, #f39c12, #f1c40f);
+}
+
+.progress-fill--not_started {
+  background: linear-gradient(90deg, #bdc3c7, #95a5a6);
+}
+
+.progress-text {
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-width: 40px;
+}
+
+/* Мета информация */
+.technology-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #ecf0f1;
+}
+
+.technology-card__meta small {
+  color: #95a5a6;
+  font-size: 0.8rem;
+}
+
+/* Анимации */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.technology-card--in_progress {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Адаптивность */
+@media (max-width: 480px) {
+  .technology-card {
+    padding: 1.2rem;
+  }
+  
+  .technology-card__title {
+    font-size: 1.2rem;
+  }
+  
+  .progress-indicator {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .progress-text {
+    text-align: right;
+  }
+}
