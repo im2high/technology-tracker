@@ -167,3 +167,165 @@
   color: #6c757d;
   font-style: italic;
 }
+/* Стили для поиска */
+.search-section {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+}
+
+.search-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #495057;
+  text-align: center;
+}
+
+.search-box {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.search-clear:hover {
+  background: #e9ecef;
+  color: #495057;
+}
+
+.search-results-count {
+  text-align: center;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.clear-search-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-search-button:hover {
+  background: #0056b3;
+}
+/* Стили для заметок */
+.technology-card-wrapper {
+  position: relative;
+}
+
+.show-notes-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.show-notes-button:hover {
+  background: #007bff;
+  color: white;
+}
+
+.notes-section-container {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+}
+
+.notes-section-container h2 {
+  margin-top: 0;
+  color: #495057;
+}
+
+.close-notes-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-notes-button:hover {
+  background: #545b62;
+}
+
+/* Стили для компонента TechnologyNotes */
+.notes-section {
+  margin: 1rem 0;
+}
+
+.notes-section h4 {
+  margin-bottom: 0.5rem;
+  color: #495057;
+}
+
+.notes-section textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.notes-section textarea:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.notes-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+}
