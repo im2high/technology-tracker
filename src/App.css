@@ -123,3 +123,47 @@
     font-size: 1.5rem;
   }
 }
+/* Стили для фильтрации */
+.filter-buttons {
+  margin: 2rem 0;
+}
+
+.filter-buttons h2 {
+  margin-bottom: 1rem;
+  color: #495057;
+}
+
+.filter-buttons-container {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #dee2e6;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.filter-button:hover {
+  border-color: #6c757d;
+  background: #f8f9fa;
+}
+
+.filter-button--active {
+  border-color: #007bff;
+  background: #007bff;
+  color: white;
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  font-style: italic;
+}

@@ -1,6 +1,6 @@
 import './TechnologyCard.css';
 
-function TechnologyCard({ title, description, status }) {
+function TechnologyCard({ id, title, description, status, onStatusChange }) {
   const statusLabels = {
     'completed': 'Завершено',
     'in-progress': 'В процессе',
@@ -25,8 +25,16 @@ function TechnologyCard({ title, description, status }) {
     'not-started': '📖'
   };
 
+  // Шаг 4: Обработчик клика для изменения статуса
+  const handleClick = () => {
+    onStatusChange(id);
+  };
+
   return (
-    <div className={`technology-card technology-card--${status}`}>
+    <div 
+      className={`technology-card technology-card--${status}`}
+      onClick={handleClick}
+    >
       <div className={`status-indicator status-indicator--${status}`}>
         {statusLabels[status]}
       </div>
