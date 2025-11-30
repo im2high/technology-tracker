@@ -1,8 +1,6 @@
-// App.js
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
-// Components
 import Navigation from './components/Navigation';
 
 // Pages
@@ -13,6 +11,7 @@ import AddTechnology from './pages/AddTechnology';
 import Statistics from './pages/Statistics';
 import Settings from './pages/Settings';
 import ApiIntegration from './pages/ApiIntegration';
+import BulkManagement from './pages/BulkManagement'; // Новая страница
 
 function App() {
   return (
@@ -29,6 +28,7 @@ function App() {
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/api-demo" element={<ApiIntegration />} />
+            <Route path="/bulk-management" element={<BulkManagement />} />
           </Routes>
         </main>
       </div>

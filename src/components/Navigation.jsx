@@ -31,6 +31,14 @@ function Navigation() {
         </li>
         <li>
           <Link 
+            to="/bulk-management" 
+            className={location.pathname === '/bulk-management' ? 'active' : ''}
+          >
+            ⚡ Массовое управление
+          </Link>
+        </li>
+        <li>
+          <Link 
             to="/api-demo" 
             className={location.pathname === '/api-demo' ? 'active' : ''}
           >
@@ -51,14 +59,6 @@ function Navigation() {
             className={location.pathname === '/add-technology' ? 'active' : ''}
           >
             ➕ Добавить
-          </Link>
-        </li>
-        <li>
-          <Link 
-            to="/settings" 
-            className={location.pathname === '/settings' ? 'active' : ''}
-          >
-            ⚙️ Настройки
           </Link>
         </li>
       </ul>

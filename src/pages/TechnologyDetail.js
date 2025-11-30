@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import DeadlineSetter from '../components/DeadLineSetter';
+import './TechnologyDetail.css';
 
 function TechnologyDetail() {
   const { techId } = useParams();
@@ -23,6 +25,18 @@ function TechnologyDetail() {
       );
       localStorage.setItem('techTrackerData', JSON.stringify(updated));
       setTechnology({ ...technology, status: newStatus });
+    }
+  };
+
+  const updateDeadline = (techId, deadline) => {
+    const saved = localStorage.getItem('techTrackerData');
+    if (saved) {
+      const technologies = JSON.parse(saved);
+      const updated = technologies.map(tech =>
+        tech.id === techId ? { ...tech, deadline } : tech
+      );
+      localStorage.setItem('techTrackerData', JSON.stringify(updated));
+      setTechnology(prev => prev ? { ...prev, deadline } : null);
     }
   };
 
@@ -75,6 +89,14 @@ function TechnologyDetail() {
               Завершено
             </button>
           </div>
+        </div>
+
+        <div className="detail-section">
+          <h3>Срок изучения</h3>
+          <DeadlineSetter 
+            technology={technology}
+            onDeadlineSet={updateDeadline}
+          />
         </div>
 
         {technology.notes && (
