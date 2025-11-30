@@ -1,6 +1,8 @@
 import './TechnologyCard.css';
 
-function TechnologyCard({ id, title, description, status, onStatusChange }) {
+function TechnologyCard({ technology, onStatusChange, onShowNotes }) {
+  const { id, title, description, status } = technology;
+
   const statusLabels = {
     'completed': 'Завершено',
     'in-progress': 'В процессе',
@@ -19,15 +21,13 @@ function TechnologyCard({ id, title, description, status, onStatusChange }) {
     'not-started': '⭕'
   };
 
-  const metaIcons = {
-    'completed': '📚',
-    'in-progress': '✍️', 
-    'not-started': '📖'
-  };
-
-  // Шаг 4: Обработчик клика для изменения статуса
   const handleClick = () => {
     onStatusChange(id);
+  };
+
+  const handleNotesClick = (e) => {
+    e.stopPropagation();
+    onShowNotes(id);
   };
 
   return (
@@ -62,9 +62,13 @@ function TechnologyCard({ id, title, description, status, onStatusChange }) {
       
       <div className="technology-card__meta">
         <small>Прогресс изучения</small>
-        <span className="status-icon">
-          {metaIcons[status]}
-        </span>
+        <button 
+          className="notes-button"
+          onClick={handleNotesClick}
+          title="Открыть заметки"
+        >
+          📝
+        </button>
       </div>
     </div>
   );

@@ -4,103 +4,39 @@ import TechnologyCard from './components/TechnologyCard';
 import ProgressHeader from './components/ProgressHeader';
 import QuickActions from './components/QuickActions';
 import TechnologyNotes from './components/TechnologyNotes';
-import { useEffect, useState } from 'react';
+import useTechnologies from './components/UseTechnologies';
+import { useState } from 'react';
 
 function App() {
-  const [technologies, setTechnologies] = useState([
-    {
-      id: 1,
-      title: 'React Components',
-      description: 'Изучение базовых компонентов и их жизненного цикла',
-      status: 'not-started',
-      notes: ''
-    },
-    {
-      id: 2,
-      title: 'JSX Syntax',
-      description: 'Освоение синтаксиса JSX и работа с выражениями',
-      status: 'not-started',
-      notes: ''
-    },
-    {
-      id: 3,
-      title: 'State Management',
-      description: 'Работа с состоянием компонентов и хуками',
-      status: 'in-progress',
-      notes: ''
-    },
-  ]);
+  const {
+    technologies,
+    updateStatus,
+    updateNotes,
+    markAllAsCompleted,
+    resetAllStatuses,
+    getRandomNextTechnology,
+    progress
+  } = useTechnologies();
 
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTechId, setSelectedTechId] = useState(null); // Для отображения заметок
+  const [selectedTechId, setSelectedTechId] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem('techTrackerData', JSON.stringify(technologies));
-    console.log('Данные сохранены в LocalStorage');
-  }, [technologies]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('techTrackerData');
-    if (saved) {
-      setTechnologies(JSON.parse(saved));
-      console.log('Данные загружены из LocalStorage');
-    }
-  }, []);
-
-  const updateTechnologyNotes = (techId, newNotes) => {
-    setTechnologies(prevTech =>
-      prevTech.map(tech =>
-        tech.id === techId ? {...tech, notes: newNotes} : tech
-      )
-    );
-  };
-
-  const updateTechnologyStatus = (id) => {
-    setTechnologies(prevTechnologies => 
-      prevTechnologies.map(tech => {
-        if (tech.id === id) {
-          const statusFlow = ['not-started', 'in-progress', 'completed'];
-          const currentIndex = statusFlow.indexOf(tech.status);
-          const nextIndex = (currentIndex + 1) % statusFlow.length;
-          return { ...tech, status: statusFlow[nextIndex] };
-        }
-        return tech;
-      })
-    );
-  };
-
-  const markAllAsCompleted = () => {
-    setTechnologies(prevTechnologies => 
-      prevTechnologies.map(tech => ({ ...tech, status: 'completed' }))
-    );
-  };
-
-  const resetAllStatuses = () => {
-    setTechnologies(prevTechnologies => 
-      prevTechnologies.map(tech => ({ ...tech, status: 'not-started' }))
-    );
-  };
-
-  const randomNextTechnology = () => {
-    const notStartedTechs = technologies.filter(tech => tech.status === 'not-started');
-    if (notStartedTechs.length === 0) {
+  const handleRandomNext = () => {
+    const randomTech = getRandomNextTechnology();
+    if (randomTech) {
+      updateStatus(randomTech.id);
+      alert(`Следующая технология: "${randomTech.title}"`);
+    } else {
       alert('Все технологии уже начаты или завершены!');
-      return;
     }
-    
-    const randomTech = notStartedTechs[Math.floor(Math.random() * notStartedTechs.length)];
-    updateTechnologyStatus(randomTech.id);
-    alert(`Следующая технология для изучения: "${randomTech.title}"`);
   };
 
   const filteredTechnologies = technologies.filter(tech => {
     const statusMatch = activeFilter === 'all' || tech.status === activeFilter;
-    
     const searchMatch = searchQuery === '' || 
       tech.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       tech.description.toLowerCase().includes(searchQuery.toLowerCase());
-    
     return statusMatch && searchMatch;
   });
 
@@ -118,18 +54,28 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Трекер изучения React</h1>
-        <p>
-          Отслеживайте прогресс изучения технологий React экосистемы
-        </p>
+        <p>Отслеживайте прогресс изучения технологий React экосистемы</p>
+        
+        <div className="progress-section">
+          <ProgressHeader technologies={technologies} />
+          <div className="overall-progress">
+            <span>Общий прогресс: {progress}%</span>
+            <div className="progress-bar">
+              <div 
+                className="progress-fill" 
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
       </header>
       
       <div className="technologies-container">
-        <ProgressHeader technologies={technologies} />
-        
         <QuickActions 
+          technologies={technologies}
           onMarkAllCompleted={markAllAsCompleted}
           onResetAll={resetAllStatuses}
-          onRandomNext={randomNextTechnology}
+          onRandomNext={handleRandomNext}
         />
         
         <div className="search-section">
@@ -146,14 +92,13 @@ function App() {
               <button 
                 className="search-clear"
                 onClick={() => setSearchQuery('')}
-                title="Очистить поиск"
               >
                 ✕
               </button>
             )}
           </div>
           <div className="search-results-count">
-            Найдено технологий: <strong>{filteredTechnologies.length}</strong>
+            Найдено: <strong>{filteredTechnologies.length}</strong>
           </div>
         </div>
         
@@ -174,17 +119,17 @@ function App() {
 
         {selectedTech && (
           <div className="notes-section-container">
-            <h2>Заметки для: {selectedTech.title}</h2>
+            <h2>Заметки: {selectedTech.title}</h2>
             <TechnologyNotes 
               notes={selectedTech.notes}
-              onNotesChange={updateTechnologyNotes}
+              onNotesChange={updateNotes}
               techId={selectedTech.id}
             />
             <button 
               className="close-notes-button"
               onClick={() => setSelectedTechId(null)}
             >
-              Закрыть заметки
+              Закрыть
             </button>
           </div>
         )}
@@ -193,21 +138,12 @@ function App() {
         
         <div className="technologies-grid">
           {filteredTechnologies.map(tech => (
-            <div key={tech.id} className="technology-card-wrapper">
-              <TechnologyCard
-                id={tech.id}
-                title={tech.title}
-                description={tech.description}
-                status={tech.status}
-                onStatusChange={updateTechnologyStatus}
-              />
-              <button 
-                className="show-notes-button"
-                onClick={() => setSelectedTechId(tech.id)}
-              >
-                📝 Заметки
-              </button>
-            </div>
+            <TechnologyCard
+              key={tech.id}
+              technology={tech}
+              onStatusChange={updateStatus}
+              onShowNotes={setSelectedTechId}
+            />
           ))}
         </div>
 
@@ -215,15 +151,12 @@ function App() {
           <div className="no-results">
             <p>
               {searchQuery 
-                ? `Не найдено технологий по запросу "${searchQuery}"` 
+                ? `Не найдено по запросу "${searchQuery}"` 
                 : 'Нет технологий с выбранным статусом'
               }
             </p>
             {searchQuery && (
-              <button 
-                className="clear-search-button"
-                onClick={() => setSearchQuery('')}
-              >
+              <button onClick={() => setSearchQuery('')}>
                 Очистить поиск
               </button>
             )}
