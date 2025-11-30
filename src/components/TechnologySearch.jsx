@@ -5,7 +5,6 @@ function TechnologySearch({ onSearch, loading }) {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  // Debounce для поиска
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedQuery(query);
@@ -14,7 +13,6 @@ function TechnologySearch({ onSearch, loading }) {
     return () => clearTimeout(timer);
   }, [query]);
 
-  // Выполняем поиск при изменении debouncedQuery
   useEffect(() => {
     if (debouncedQuery !== '') {
       onSearch(debouncedQuery);

@@ -1,331 +1,81 @@
-.App {
-  text-align: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-.App-header {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
-.App-logo {
-  height: 80px;
-  margin-bottom: 1rem;
-  animation: logo-float 3s ease-in-out infinite;
-}
-
-@keyframes logo-float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.App-header h1 {
-  color: #2c3e50;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-}
-
-.App-header p {
-  color: #7f8c8d;
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.technologies-container {
+.page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
-.technologies-container h2 {
-  color: white;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.technologies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2rem;
-  justify-content: center;
-}
-
-/* Стили для плавного появления компонентов */
-.technologies-container > * {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .App-header {
-    padding: 1.5rem;
-  }
-  
-  .App-header h1 {
-    font-size: 2rem;
-  }
-  
-  .App-header p {
-    font-size: 1rem;
-  }
-  
-  .technologies-container {
-    padding: 0 1rem 2rem;
-  }
-  
-  .technologies-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .technologies-container h2 {
-    font-size: 1.7rem;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .App-header {
-    padding: 1rem;
-  }
-  
-  .App-header h1 {
-    font-size: 1.8rem;
-  }
-  
-  .technologies-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .technologies-container h2 {
-    font-size: 1.5rem;
-  }
-}
-/* Стили для фильтрации */
-.filter-buttons {
-  margin: 2rem 0;
-}
-
-.filter-buttons h2 {
-  margin-bottom: 1rem;
-  color: #495057;
-}
-
-.filter-buttons-container {
-  display: flex;
-  gap: 0.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.filter-button {
-  padding: 0.5rem 1rem;
-  border: 2px solid #dee2e6;
-  background: white;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-}
-
-.filter-button:hover {
-  border-color: #6c757d;
-  background: #f8f9fa;
-}
-
-.filter-button--active {
-  border-color: #007bff;
-  background: #007bff;
-  color: white;
-}
-
-.no-results {
-  text-align: center;
   padding: 2rem;
-  color: #6c757d;
-  font-style: italic;
-}
-/* Стили для поиска */
-.search-section {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 12px;
-  border: 2px solid #e9ecef;
 }
 
-.search-section h2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #495057;
-  text-align: center;
+.page-header {
+  margin-bottom: 2rem;
 }
 
-.search-box {
-  position: relative;
-  max-width: 500px;
-  margin: 0 auto 1rem;
+.page-header h1 {
+  margin: 0 0 0.5rem 0;
+  color: inherit;
 }
 
-.search-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  padding-right: 2.5rem;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease;
+.page-header p {
+  margin: 0;
+  color: inherit;
+  opacity: 0.8;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-}
-
-.search-clear {
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
+.btn {
+  padding: 0.75rem 1.5rem;
   border: none;
-  font-size: 1.2rem;
-  color: #6c757d;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 50%;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: all 0.3s ease;
 }
 
-.search-clear:hover {
-  background: #e9ecef;
-  color: #495057;
-}
-
-.search-results-count {
-  text-align: center;
-  color: #495057;
-  font-size: 1rem;
-}
-
-.clear-search-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.clear-search-button:hover {
-  background: #0056b3;
-}
-/* Стили для заметок */
-.technology-card-wrapper {
-  position: relative;
-}
-
-.show-notes-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 10;
-}
-
-.show-notes-button:hover {
-  background: #007bff;
+.btn-primary {
+  background-color: #1976d2;
   color: white;
 }
 
-.notes-section-container {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 12px;
-  border: 2px solid #e9ecef;
+.btn-primary:hover {
+  background-color: #1565c0;
 }
 
-.notes-section-container h2 {
-  margin-top: 0;
-  color: #495057;
-}
-
-.close-notes-button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: #6c757d;
+.btn-secondary {
+  background-color: #6c757d;
   color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.close-notes-button:hover {
-  background: #545b62;
+.btn-secondary:hover {
+  background-color: #5a6268;
 }
 
-/* Стили для компонента TechnologyNotes */
-.notes-section {
-  margin: 1rem 0;
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid #1976d2;
+  color: #1976d2;
 }
 
-.notes-section h4 {
-  margin-bottom: 0.5rem;
-  color: #495057;
+.btn-outline:hover {
+  background-color: #1976d2;
+  color: white;
 }
 
-.notes-section textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #dee2e6;
-  border-radius: 6px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  resize: vertical;
-  transition: border-color 0.3s ease;
-}
-
-.notes-section textarea:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.notes-hint {
-  margin-top: 0.5rem;
-  font-size: 0.8rem;
-  color: #6c757d;
-  font-style: italic;
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
 }
